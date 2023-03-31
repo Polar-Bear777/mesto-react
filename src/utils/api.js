@@ -11,7 +11,7 @@ export class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка 1: ${res} ${res.status}`);
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   // Загрузка информации о пользователе с сервера
@@ -29,7 +29,7 @@ export class Api {
   }
 
   // Редактирование профиля
-  editUserInfo(data) {
+  editUserInfo(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
@@ -37,14 +37,14 @@ export class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: data.name,
-        about: data.info,
+        name,
+        about,
       }),
     }).then((res) => this._responseStatus(res));
   }
 
   // Добавление новой карточки через попап
-  addCard(inputValues) {
+  addCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: {
@@ -52,8 +52,8 @@ export class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: inputValues.name,
-        link: inputValues.link,
+        name,
+        link,
       }),
     }).then((res) => this._responseStatus(res));
   }
@@ -64,7 +64,7 @@ export class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatar,
+        avatar,
       }),
     }).then((res) => this._responseStatus(res));
   }
@@ -80,25 +80,11 @@ export class Api {
     }).then((res) => this._responseStatus(res));
   }
 
-  // Постановка лайка
-  setLike(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: "PUT",
-      headers: {
-        authorization: "c7a7f9e2-add2-49e1-b302-3362c55f30ce",
-        "Content-Type": "application/json",
-      },
-    }).then((res) => this._responseStatus(res));
-  }
-
-  // Снятие лайка
-  deleteLike(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: "DELETE",
-      headers: {
-        authorization: "c7a7f9e2-add2-49e1-b302-3362c55f30ce",
-        "Content-Type": "application/json",
-      },
+  // Поставить\Снять ЛАЙК
+  changeLikeCardStatus(id, isLiked) {
+    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+      method: `${isLiked ? "PUT" : "DELETE"}`,
+      headers: this._headers,
     }).then((res) => this._responseStatus(res));
   }
 }

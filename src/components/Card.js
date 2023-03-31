@@ -1,6 +1,18 @@
 import React from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function Card({card, onCardClick, onCardDelete}) {
+function Card({card, onCardClick, onCardLike, onCardDelete}) {
+    // Подписка на контекст (App > USER_INFO)
+    const currentUser = React.useContext(CurrentUserContext);
+
+    // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    
+    // Отображение стиля лайка
+    const cardLikeButtonClassName = ( 
+        `elements__like ${isLiked && 'elements__like_active'}` 
+    );
+
     // Обработчик клика
     function handleCardClick() {
         onCardClick(card);
@@ -8,7 +20,11 @@ function Card({card, onCardClick, onCardDelete}) {
 
     function handleDeleteClick() {
         onCardDelete(card);
-      }
+    }
+
+    function handleLikeClick() {
+        onCardLike(card);
+    }
 
     return (
         <article key={card._id} className="elements__item">
@@ -26,7 +42,12 @@ function Card({card, onCardClick, onCardDelete}) {
             ></button>
             <div className="elements__container">
                 <h2 className="elements__title">{card.name}</h2>
-                <button className="elements__like" type="button"></button>
+                <button 
+                    className={cardLikeButtonClassName} 
+                    onClick={handleLikeClick}
+                    type="button"
+                    aria-label="Оценить фото"
+                ></button>
             </div>
             <span className="elements__like-number">{card.likes.length}</span>
         </article>
