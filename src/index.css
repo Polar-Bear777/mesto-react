@@ -8,6 +8,9 @@
 /* HEADER */
 @import url("./blocks/header/header.css");
 @import url("./blocks/header/__logo/header__logo.css");
+@import url("./blocks/header/__auth/header__auth.css");
+@import url("./blocks/header/__link/header__link.css");
+@import url("./blocks/header/__text/header__text.css");
 
 /* PROFILE */
 @import url("./blocks/profile/profile.css");
@@ -94,3 +97,21 @@
 @import url("./blocks/error/_visible/error_visible.css");
 @import url("./blocks/popup/__save/_invalid/popup__save_invalid.css");
 @import url("./blocks/popup/__input/_type/popup__input_type_error.css");
+
+/* LOGIN */
+@import url("./blocks/login/login.css");
+@import url("./blocks/login/__container/login__container.css");
+@import url("./blocks/login/__btn/login__btn.css");
+@import url("./blocks/login/__form/login__form.css");
+@import url("./blocks/login/__input/login__input.css");
+@import url("./blocks/login/__title/login__title.css");
+@import url("./blocks/login/__link/login__link.css");
+@import url("./blocks/login/__text/login__text.css");
+
+/* POPUP-REGISTER */
+@import url("./blocks/popup-register/popup-register.css");
+@import url("./blocks/popup-register/__btn-close/popup-register__btn-close.css");
+@import url("./blocks/popup-register/__container/popup-register__container.css");
+@import url("./blocks/popup-register/__message/popup-register__message.css");
+@import url("./blocks/popup-register/__status/popup-register__status.css");
+

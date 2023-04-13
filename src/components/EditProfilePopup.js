@@ -43,6 +43,7 @@ function EditProfilePopup(props) {
       btnText="Сохранить"
       onClose={props.onClose}
       onSubmit={handleSubmit}
+      onCloseClick={props.onCloseClick}
     >
       <input
         type="text"

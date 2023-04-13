@@ -1,6 +1,6 @@
 import PopupWithForm from "./PopupWithForm";
 
-function ConfirmDeletePopup({onCardDelete, card, isOpen, onClose}) {
+function ConfirmDeletePopup({onCardDelete, card, isOpen, onClose, onCloseClick}) {
   function handleSubmit(e) {
     e.preventDefault();
     onCardDelete(card);
@@ -14,6 +14,7 @@ function ConfirmDeletePopup({onCardDelete, card, isOpen, onClose}) {
         isOpen={isOpen} 
         onClose={onClose}
         onSubmit={handleSubmit}
+        onCloseClick={onCloseClick}
     ></PopupWithForm>
   );
 }
